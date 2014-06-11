@@ -23,6 +23,8 @@ SRC_S		=	$(SRC)serveur/main.c \
 				$(SRC)serveur/parse_av.c \
 				$(SRC)serveur/use_av.c \
 				$(SRC)serveur/init_map.c \
+				$(SRC)serveur/serveur.c \
+				$(SRC)serveur/loop.c \
 
 OBJ_S		=	$(SRC_S:.c=.o)
 

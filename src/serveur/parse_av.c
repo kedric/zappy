@@ -6,11 +6,16 @@
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/07 07:01:48 by jmancero          #+#    #+#             */
-/*   Updated: 2014/06/07 08:46:50 by jmancero         ###   ########.fr       */
+/*   Updated: 2014/06/07 10:46:17 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "serveur.h"
+
+/*
+** init_port permet de recuperer le numero de port passer en argumment
+** si il est plus petit ou egale a 0 sort une erreur et quitte.
+*/
 
 int		init_port(t_env *env, char **av, int i)
 {
@@ -24,6 +29,11 @@ int		init_port(t_env *env, char **av, int i)
 	return (-1);
 }
 
+/*
+** verbose si l option -v est trouver cette fonction l active en remplassent
+** dans la structure env->v
+*/
+
 int		verbose(t_env *env, char **av, int i)
 {
 	(void)av;
@@ -31,6 +41,11 @@ int		verbose(t_env *env, char **av, int i)
 	ft_printf("mode verbose activer\n");
 	return (i);
 }
+
+/*
+** use_av traite va faire appele a la fonction qui corespont a l arg trouver
+** dans search_opt en corespondance avec le (char *)opt de cette meme fonction
+*/
 
 int		use_av(char **av, int i, t_env *env, int ret)
 {
@@ -47,6 +62,11 @@ int		use_av(char **av, int i, t_env *env, int ret)
 	return (i);
 }
 
+/*
+** search opt regarde si une corespondance avec la chaine de charater opt
+** si l'argument n est pas dans la liste il renvoy -1.
+*/
+
 int		search_opt(char *av)
 {
 	char	*opt;
@@ -61,6 +81,12 @@ int		search_opt(char *av)
 			ret = -1;
 	return (ret);
 }
+
+/*
+** parse_av permet de recuperrer les element entrer au lancement
+** il va boucler si il trouve un arg commencent par -
+** il passe search_op.
+*/
 
 void	parse_av(char **av, int ac, t_env *env)
 {

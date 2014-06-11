@@ -6,11 +6,15 @@
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/07 09:22:13 by jmancero          #+#    #+#             */
-/*   Updated: 2014/06/07 10:11:20 by jmancero         ###   ########.fr       */
+/*   Updated: 2014/06/07 10:48:20 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "serveur.h"
+
+/*
+** init_case permet d initialiser une case a 0
+*/
 
 t_case	*init_case(int y, int x, t_env *env)
 {
@@ -28,9 +32,15 @@ t_case	*init_case(int y, int x, t_env *env)
 	ret->nb_player = 0;
 	ret->player = NULL;
 	if (env->v)
-		ft_printf("initialisation de la case x : %d, Y : %d \n", x, y);
+		ft_printf("initialisation de la case X: %d, Y: %d \n", ret->x, ret->y);
 	return (ret);
 }
+
+/*
+** create_map va boucler pour creer la map
+** i represente la ligne.
+** j represente la colonne.
+*/
 
 void	create_map(t_env *env)
 {

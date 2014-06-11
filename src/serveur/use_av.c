@@ -6,11 +6,16 @@
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/07 07:47:31 by jmancero          #+#    #+#             */
-/*   Updated: 2014/06/07 09:31:14 by jmancero         ###   ########.fr       */
+/*   Updated: 2014/06/07 10:45:47 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "serveur.h"
+
+/*
+** init_x, init_y, int_c transforeme largument en int utilisable plus tard tout
+** en verifiants si les argument existe
+*/
 
 int		init_x(t_env *env, char **av, int i)
 {
@@ -37,6 +42,29 @@ int		init_y(t_env *env, char **av, int i)
 	ft_printf("taille y = %d\n", env->y_max);
 	return (i + 1);
 }
+
+int		init_c(t_env *env, char **av, int i)
+{
+	if (av[i + 1])
+		env->c_start = ft_atoi(av[i + 1]);
+	if (env->c_start <= 0)
+	{
+		ft_dprintf(2, "invalide argument -c > 0\n");
+		say_usage(av[0]);
+	}
+	ft_printf("nombre d'equipe au demarage = %d\n", env->c_start);
+	return (i + 1);
+}
+
+/*
+** init_n compte le nombre de team passer en argument puis creer le tableaux qui
+** va stocker les equipes si la variable env->team est deja definie retourne un
+** erreur et quitte.
+**
+** create_new_team verifie que le nom de la team n est pas deja definie ,sinon
+** sort une erreur et quit, puis aloue la place necesaire pour y stocker
+** les informations de lequipe
+*/
 
 int		creat_new_team(t_env *env, char *name)
 {
@@ -85,18 +113,10 @@ int		init_n(t_env *env, char **av, int i)
 	return (0);
 }
 
-int		init_c(t_env *env, char **av, int i)
-{
-	if (av[i + 1])
-		env->c_start = ft_atoi(av[i + 1]);
-	if (env->c_start <= 0)
-	{
-		ft_dprintf(2, "invalide argument -c > 0\n");
-		say_usage(av[0]);
-	}
-	ft_printf("nombre d'equipe au demarage = %d\n", env->c_start);
-	return (i + 1);
-}
+/*
+** init_t permet de recuper la valeur -t (time) attention la fonction
+** ne marche pas comme il faut.
+*/
 
 int		init_t(t_env *env, char **av, int i)
 {
