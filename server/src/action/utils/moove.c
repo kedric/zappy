@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lower_pv.c                                         :+:      :+:    :+:   */
+/*   moove.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/06/12 09:09:09 by jmancero          #+#    #+#             */
-/*   Updated: 2014/06/12 11:03:21 by jmancero         ###   ########.fr       */
+/*   Created: 2014/06/12 13:13:41 by jmancero          #+#    #+#             */
+/*   Updated: 2014/06/12 15:16:57 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "action.h"
+#include <stddef.h>
 
-/*
-** cette fonction rajoute un tour depuis la dernier foit ou le joueur a manger
-*/
-
-int		lower_pv(t_life *life)
+int			do_moove(t_act *act, t_player *player)
 {
-	life->turn++;
-	life->pv = (PV_VALUE - life->turn) / (PV_VALUE / 10);
-	if ((PV_VALUE - life->turn) % (PV_VALUE / 10) != 0)
-		life->pv++;
-	return ((life->pv == 0) ? -2 : 0);
+	square_remove_player(player->square, player);
+	// voire avec romain pour qu il fasse une fonction pour me sortire un t_squar
+	// square_add_player(act->to, player);
+
+	// send message client / graphique
+}
+
+int			init_moove(t_act *act, t_player *player, t_world *world)
+{
+	act->fct_check = NULL;
+	act->waiting = TIME_MOOVE;
+	act->fct_do = do_moove;
+	act->next = NULL;
 }

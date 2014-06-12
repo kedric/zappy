@@ -6,7 +6,7 @@
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/11 15:16:08 by jmancero          #+#    #+#             */
-/*   Updated: 2014/06/12 10:38:05 by jmancero         ###   ########.fr       */
+/*   Updated: 2014/06/12 13:18:04 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int init_new_turn(t_player *player)
 	ret = 0;
 	if ((ret = lower_pv(&player->pv)) != 0)
 		return (ret);
-	lower_turn_action();
+	if (player->action->first != NULL)
+		lower_action(player->action->first);
+	return (0);
 }
 
 
@@ -38,6 +40,7 @@ void	do_turn(t_team_stack *team, t_world *world)
 	int				ret;
 	t_team			*tmp_t;
 	t_player_stack	*tmp_p;
+	t_table_action		*tab_act;
 
 	if (team == NULL || world == NULL)
 		return ;
@@ -45,13 +48,14 @@ void	do_turn(t_team_stack *team, t_world *world)
 		return ;
 	if ((tmp_p = tmp_t->players) == NULL)
 		return ;
+	tab_act = sig_tab_act();
 	i = -1;
 	while (++i < team->count)
 	{
 		while (tmp_p != NULL)
 		{
-			init_new_turn(tmp_p->player);
-			if ((ret = check_act(tmp_p->player, world)) == 1)
+			if ((ret = init_new_turn(tmp_p->player)) != 0
+				|| (ret = check_act(tmp_p->player, world)) != 0)
 				do_act();
 			tmp_p = tmp_p->next;
 		}

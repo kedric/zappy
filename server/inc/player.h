@@ -6,7 +6,7 @@
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/04 11:25:20 by rthebaud          #+#    #+#             */
-/*   Updated: 2014/06/12 09:57:34 by jmancero         ###   ########.fr       */
+/*   Updated: 2014/06/12 10:51:07 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_player		t_player;
 # include "team.h"
 # include "square.h"
 # include "resource.h"
+# include "action.h"
 
 # define PLAYER_START_LIFE 10
 # define PLAYER_START_LEVEL 1
@@ -45,6 +46,7 @@ struct	s_player
 	int			life;
 	t_life		pv;
 	t_orient	orientation;
+	t_action	*action;
 	t_square	*square;
 	t_team		*team;
 	t_resource	*resources;
