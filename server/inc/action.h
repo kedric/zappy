@@ -6,7 +6,7 @@
 /*   By: jmancero <jmancero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/11 14:50:18 by jmancero          #+#    #+#             */
-/*   Updated: 2014/06/12 15:14:05 by jmancero         ###   ########.fr       */
+/*   Updated: 2014/06/14 10:38:25 by jmancero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ACTION_H
 # include "world.h"
 # include "team_stack.h"
+# include "../libft/inc/libft.h"
 
 # define PV_VALUE 1260
 /*
